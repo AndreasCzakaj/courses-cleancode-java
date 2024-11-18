@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 class SignUpService {
-    GenericDao<String, Person> dao;
+    private final GenericDao<String, Person> dao;
     SignUpService(GenericDao<String, Person> dao) {
         this.dao = dao;
     }
