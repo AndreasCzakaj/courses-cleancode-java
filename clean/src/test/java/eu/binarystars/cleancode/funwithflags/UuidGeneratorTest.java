@@ -24,8 +24,8 @@ class UuidGeneratorTest {
         return Stream.of(
                 Arguments.arguments(new UuidGeneratorNaiveRandomImpl(), "[a-f0-9]{32}", "lower case, no dashes")
                 //Arguments.arguments(new ???(), "[A-F0-9]{32}", "upper case, no dashes"),
-                //Arguments.arguments(new ???(), "[A-F0-9]{32}", "lower case, with dashes"),
-                //Arguments.arguments(new ???(), "[A-F0-9]{32}", "upper case, with dashes")
+                //Arguments.arguments(new ???(), "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}", "lower case, with dashes"),
+                //Arguments.arguments(new ???(), "[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}", "upper case, with dashes")
         );
     }
 }
