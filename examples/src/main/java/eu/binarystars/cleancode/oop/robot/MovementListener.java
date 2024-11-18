@@ -1,4 +1,4 @@
-package eu.binarystars.cleancode.robot;
+package eu.binarystars.cleancode.oop.robot;
 
 import java.util.EventListener;
 import java.util.function.Consumer;
