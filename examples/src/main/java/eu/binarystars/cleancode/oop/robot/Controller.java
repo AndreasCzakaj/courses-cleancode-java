@@ -28,12 +28,12 @@ public class Controller {
 
         if (!automaton.started) {
             if (automaton instanceof DroneDto) {
-                if (automaton.battery > 2500) {
+                if (automaton.battery > 4500) {
                     ((DroneDto)automaton).cameraStream = new ArrayList<>();
                     automaton.started = true;
                 }
             } else if (automaton instanceof RobotDto) {
-                if (automaton.battery > 1500) {
+                if (automaton.battery > 3500) {
                     // do stuff
                     automaton.started = true;
                 }
