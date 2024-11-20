@@ -13,7 +13,12 @@ public class Functions {
 
 
     // unclean with 4 args
-    void printAddressLine1(Employee employee, BiFunction<String, String, Optional<String>> translationProvider, String language, Consumer<String> printConsumer) {
+    static void printAddressLine1(
+            Employee employee, BiFunction<String,
+            String, Optional<String>> translationProvider, 
+            String language, 
+            Consumer<String> printConsumer
+    ) {
         final var positionKey = employee.getPosition();
         final var sb = new StringBuilder();
         sb.append(employee.getName());
@@ -26,7 +31,10 @@ public class Functions {
         private final BiFunction<String, String, Optional<String>> translationProvider;
         private final String language;
 
-        EmployeePrinter2(BiFunction<String, String, Optional<String>> translationProvider, String language) {
+        EmployeePrinter2(
+                BiFunction<String, String, Optional<String>> translationProvider,
+                String language
+        ) {
             this.translationProvider = translationProvider;
             this.language = language;
         }
