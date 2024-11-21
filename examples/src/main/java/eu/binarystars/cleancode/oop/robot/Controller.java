@@ -1,9 +1,7 @@
 package eu.binarystars.cleancode.oop.robot;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class Controller {
     void doItOoStyle(Function<Position, Automaton> factory) {
