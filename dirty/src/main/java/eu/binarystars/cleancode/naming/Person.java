@@ -1,11 +1,12 @@
 package eu.binarystars.cleancode.naming;
 
 public class Person {
-    String coreFirstName;
-    String coreLastName;
-    String coreState;
-    String addrStreetAndNo;
-    String addrZipAndCity;
-    String addrState;
+    public String id;
+    public String coreFirstName;
+    public String coreLastName;
+    public String coreState;
+    public String addrStreetAndNo;
+    public String addrZipAndCity;
+    public String addrState;
 
 }
