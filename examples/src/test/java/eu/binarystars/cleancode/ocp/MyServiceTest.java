@@ -21,6 +21,6 @@ class MyServiceTest {
 
     @Test
     void init() {
-        assertThat(sut.magic(null)).isEqualTo("Expelliarmus");
+        assertThat(sut.magic(null)).isEqualTo("Expelliarmus!");
     }
 }
