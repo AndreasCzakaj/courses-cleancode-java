@@ -1,7 +1,10 @@
 package eu.binarystars.cleancode.naming;
 
 public class Person {
-    String firstName;
+    String coreFirstName;
     String coreLastName;
-    String state;
+    String coreState;
+    String addrStreetAndNo;
+    String addrZipAndCity;
+    String addrState;
 }
