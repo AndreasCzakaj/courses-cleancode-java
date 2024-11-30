@@ -22,14 +22,12 @@ class PersonTest {
         person.addrStreetAndNo = "Penny Lane";
         person.addrZipAndCity = "Beverly Bills, 90210";
         person.addrState = "California";
-        // given
-        // when
-        // then        
-        assertThat(person).usingRecursiveComparison().isEqualTo(
-                Person.builder()
-                        .coreFirstName("Kim").coreLastName("Gordon").coreState("active")
-                        .addrStreetAndNo("Penny Lane").addrZipAndCity("Beverly Bills, 90210").addrState("California")
-                .build()
-        );
+        
+        assertThat(person.coreFirstName).isEqualTo("Kim");
+        assertThat(person.coreLastName).isEqualTo("Gordon");
+        assertThat(person.coreState).isEqualTo("active");
+        assertThat(person.addrStreetAndNo).isEqualTo("Penny Lane");
+        assertThat(person.addrZipAndCity).isEqualTo("Beverly Bills, 90210");
+        assertThat(person.addrState).isEqualTo("California");
     }
 }

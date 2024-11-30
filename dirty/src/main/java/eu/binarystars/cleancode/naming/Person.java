@@ -14,4 +14,5 @@ public class Person {
     String addrStreetAndNo;
     String addrZipAndCity;
     String addrState;
+
 }
