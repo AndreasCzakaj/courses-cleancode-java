@@ -18,29 +18,37 @@ class PersonServiceTest {
         sut = new PersonService();
     }
 
-    @Test
-    void shouldSignUpValidPerson() {
-        // given
+    static Person createValidPerson() {
         var person = new Person();
         person.coreFirstName = "CJ";
         person.coreLastName = "Ramone";
+        return person;
+    }
+
+    @Test
+    void shouldSignUpValidPerson() {
+        // given
+        var person = createValidPerson();
 
         // when
         var signedUpPerson = sut.signUp(person);
 
         // then
-        assertThat(signedUpPerson.coreFirstName).isEqualTo("CJ");
-        assertThat(signedUpPerson.coreLastName).isEqualTo("Ramone");
-        assertThat(signedUpPerson.coreState).isEqualTo("new");
-        assertThat(signedUpPerson.id).matches(Pattern.compile("[0-9]{1,1}"));
+        expectSignedUpUser(signedUpPerson, person);
+    }
+
+    private static void expectSignedUpUser(final Person actual, final Person expected) {
+        assertThat(actual.coreFirstName).isEqualTo(expected.coreFirstName);
+        assertThat(actual.coreLastName).isEqualTo(expected.coreLastName);
+        assertThat(actual.coreState).isEqualTo("new"); // or expected.coreState
+        assertThat(actual.id).matches(Pattern.compile("[0-9]{1,1}"));
     }
 
     @Test
     void shouldThrowErrorWhenSigningUpInvalidPerson() {
         // given
-        var person = new Person();
+        var person = createValidPerson();
         person.coreFirstName = "P";
-        person.coreLastName = "Diddy";
 
         // when
         ThrowableAssert.ThrowingCallable action = () -> sut.signUp(person);
