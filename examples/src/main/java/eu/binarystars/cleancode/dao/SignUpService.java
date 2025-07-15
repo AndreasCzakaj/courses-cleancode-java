@@ -11,18 +11,19 @@ class SignUpService {
 
     SignUpResult process(SignUpData signUpData) {
         validateSignUpData(signUpData);
-        Person person = new Person(signUpData.email());
-        // set fields
 
         try {
-            Optional<Person> maybeExistingPerson = dao.get(signUpData.email());
+            Optional<Person> maybeExistingPerson = dao.get(signUpData.userName);
             if (maybeExistingPerson.isPresent()) {
                 throw new IllegalArgumentException("email: already exists");
             }
+            Person person = Person.builder()
+                    .userName(signUpData.userName)
+                    .passwordHash(signUpData.password) // ToDo: hash tha thang
+                    .email(signUpData.email)
+                    .build();
             Person savedPerson = dao.save(person);
-            var out = new SignUpResult();
-            // ... fields
-            return out;
+            return SignUpResult.builder().person(savedPerson).build();
         } catch (IOException e) {
             throw new InternalServerException(e);
         }

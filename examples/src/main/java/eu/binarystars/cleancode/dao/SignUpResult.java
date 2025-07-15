@@ -1,4 +1,8 @@
 package eu.binarystars.cleancode.dao;
 
-public record SignUpResult() {
+import lombok.Builder;
+
+@Builder
+public class SignUpResult {
+    Person person;
 }

@@ -1,3 +1,10 @@
 package eu.binarystars.cleancode.dao;
 
-public record SignUpData(String email) {}
+import lombok.Builder;
+
+@Builder
+public class SignUpData {
+    final String userName;
+    final String password;
+    final String email;
+}
