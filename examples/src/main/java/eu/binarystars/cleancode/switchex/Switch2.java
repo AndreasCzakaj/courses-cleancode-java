@@ -9,7 +9,7 @@ public class Switch2 {
             "laser", ???,
             "DEFAULT", ???
     );
-    
+
     void useForce(String power, Consumer<String> forceConsumer) {
         var hero = powerToHeroMap.getOrDefault(power, powerToHeroMap.get("DEFAULT"));
         hero.useForce(forceConsumer);
