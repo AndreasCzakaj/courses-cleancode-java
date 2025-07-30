@@ -46,7 +46,7 @@ class SignUpServiceTest {
     }
 
     @Test
-    void shouldWork() throws Exception {
+    void shouldWork() {
         // given
         SignUpData signUpData = SignUpData.builder()
                 .userName(newPerson.userName)

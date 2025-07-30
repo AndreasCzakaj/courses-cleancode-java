@@ -15,12 +15,12 @@ public class GenericDaoMapImpl<I, E> implements GenericDao<I, E> {
     }
 
     @Override
-    public Optional<E> get(final I uid)  throws IOException {
+    public Optional<E> get(final I uid)  throws DaoException {
         return Optional.ofNullable(repo.get(uid.toString()));
     }
 
     @Override
-    public E save(final E entity) throws IOException {
+    public E save(final E entity) throws DaoException {
         repo.put(uidProvider.apply(entity).toString(), entity);
         return entity;
     }

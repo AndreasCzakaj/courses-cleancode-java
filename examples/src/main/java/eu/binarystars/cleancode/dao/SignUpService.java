@@ -12,19 +12,31 @@ class SignUpService {
     SignUpResult process(SignUpData signUpData) {
         validateSignUpData(signUpData);
 
+        Optional<Person> maybeExistingPerson = getPersonFromStorage(signUpData.userName);
+        if (maybeExistingPerson.isPresent()) {
+            throw new IllegalArgumentException("userName: already exists");
+        }
+        Person person = Person.builder()
+                .userName(signUpData.userName)
+                .passwordHash(signUpData.password) // ToDo: hash tha thang
+                .email(signUpData.email)
+                .build();
+        Person savedPerson = savePersonToStorage(person);
+        return SignUpResult.builder().person(savedPerson).build();
+    }
+
+    Optional<Person> getPersonFromStorage(String userName) {
         try {
-            Optional<Person> maybeExistingPerson = dao.get(signUpData.userName);
-            if (maybeExistingPerson.isPresent()) {
-                throw new IllegalArgumentException("userName: already exists");
-            }
-            Person person = Person.builder()
-                    .userName(signUpData.userName)
-                    .passwordHash(signUpData.password) // ToDo: hash tha thang
-                    .email(signUpData.email)
-                    .build();
-            Person savedPerson = dao.save(person);
-            return SignUpResult.builder().person(savedPerson).build();
-        } catch (IOException e) {
+            return dao.get(userName);
+        } catch (DaoException e) {
+            throw new InternalServerException(e);
+        }
+    }
+
+    Person savePersonToStorage(Person person) {
+        try {
+            return dao.save(person);
+        } catch (DaoException e) {
             throw new InternalServerException(e);
         }
     }
