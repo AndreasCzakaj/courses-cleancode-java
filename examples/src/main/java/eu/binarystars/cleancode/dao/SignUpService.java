@@ -15,7 +15,7 @@ class SignUpService {
         try {
             Optional<Person> maybeExistingPerson = dao.get(signUpData.userName);
             if (maybeExistingPerson.isPresent()) {
-                throw new IllegalArgumentException("email: already exists");
+                throw new IllegalArgumentException("userName: already exists");
             }
             Person person = Person.builder()
                     .userName(signUpData.userName)
