@@ -2,7 +2,7 @@ package eu.binarystars.cleancode.dao;
 
 import lombok.Builder;
 
-@Builder
+@Builder(toBuilder = true)
 public class Person {
     final String id;
     final String userName;
