@@ -120,10 +120,10 @@ class FibonacciTest {
 
 
 
-    @ParameterizedTest(name = "it should yield {1} for input {0}")
+    @ParameterizedTest(name = "it should yield {1} for index {0}")
     @MethodSource("passParams")
     @Disabled
-    public void itShouldPass(Integer input, Integer expected) {
+    public void itShouldPass(Integer index, Integer expected) {
     }
 
     static Stream<Arguments> passParams() {
@@ -141,10 +141,10 @@ class FibonacciTest {
         );
     }
 
-    @ParameterizedTest(name = "it should throw IllegalArgumentException with message \"{1}\" for input {0}")
+    @ParameterizedTest(name = "it should throw IllegalArgumentException with message \"{1}\" for index {0}")
     @MethodSource("throwParams")
     @Disabled
-    public void itShouldThrow(Integer input, String expectedMessage) {
+    public void itShouldThrow(Integer index, String expectedMessage) {
     }
 
     static Stream<Arguments> throwParams() {
