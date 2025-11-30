@@ -1,5 +1,6 @@
 package eu.binarystars.cleancode.tests;
 
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import org.junit.jupiter.api.function.Executable;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -42,16 +44,24 @@ class FibonacciTest {
     void itShouldThrowForIndexNull() {
         // given
         Integer index = null;
-        String expected = "Index must not be null";
+        String expected = "???";
 
-        // when/then
+        // optional: declare action as "when"
+        // Executable action = () -> fibonacci.calc(index);
+
+        // when/then (2-step-syntax)
         IllegalArgumentException e = assertThrows(
                 IllegalArgumentException.class,
-                () -> fibonacci.calc(index)
+                () -> fibonacci.calc(index)     // or use action here
         );
 
         // then
-        //assertThat(???).isEqualTo(???);
+        assertThat(e).hasMessage(expected);
+
+        // alternative syntax (1-step):
+        assertThatThrownBy(() -> fibonacci.calc(index))
+            .isExactlyInstanceOf(IllegalArgumentException.class)
+            .hasMessage(expected);
     }
 
     @Test
