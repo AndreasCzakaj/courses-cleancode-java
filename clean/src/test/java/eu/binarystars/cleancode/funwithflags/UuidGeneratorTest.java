@@ -1,10 +1,14 @@
 package eu.binarystars.cleancode.funwithflags;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -18,7 +22,9 @@ class UuidGeneratorTest {
         var actual = uuidGenerator.create();
 
         // then
-        assertThat(actual).matches(Pattern.compile(expectedRegex));
+        assertThat(actual)
+                .matches(Pattern.compile(expectedRegex))
+                .as(info);
     }
     static Stream<Arguments> shouldCreateAUuidInTheMatchingFormatParams() {
         final var baseImpl = new UuidGeneratorNaiveRandomImpl();
@@ -28,5 +34,30 @@ class UuidGeneratorTest {
                 //Arguments.arguments(new ???, "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}", "lower case, with dashes")
                 //Arguments.arguments(new ???, "[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}", "upper case, with dashes")
         );
+    }
+
+
+    @Test
+    void shouldUseAllChars() {
+
+        String[] hexChars = new String[]{
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"
+        };
+        var foundChars = new HashMap<String, Integer>();
+
+        UuidGenerator uuidGenerator = new UuidGeneratorNaiveRandomImpl();
+
+        // yes, I'm looping. I need this because the process is random.
+        IntStream.range(0, 10).forEach(r -> {
+            uuidGenerator.create().chars().forEach(i -> {
+                String s = String.valueOf((char) i);
+                foundChars.put(s, foundChars.getOrDefault(s, 0) + 1);
+            });
+        });
+
+        assertThat(foundChars)
+                .containsKeys(hexChars)
+                .allSatisfy((k, v) -> assertThat(v).isGreaterThan(0));
+        assertThat(foundChars.values()).allMatch(value -> value > 0);
     }
 }
